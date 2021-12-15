@@ -1,8 +1,19 @@
+var listenCount = 0
 var synth = window.speechSynthesis;
-var voices = synth.getVoices()
+var voices = window.speechSynthesis.getVoices();
+
+// voices = synth.getVoices().sort(function (a, b) {
+//     const aname = a.name.toUpperCase(), bname = b.name.toUpperCase();
+//     if ( aname < bname ) return -1;
+//     else if ( aname == bname ) return 0;
+//     else return +1;
+// })
 console.log(voices)
+
+//console.log(voices)
 document.querySelector('#start').onclick = () => {
-    Say("hi it's me Endless");
+    Say("hi it's me Valeria")
+    //Say("Ashu's ")
     recognition.start();
 }
 
@@ -21,17 +32,17 @@ recognition.lang = 'en-US';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
-var listenCount = 0
+
 
 function Say(str) {
     var utterThis = new SpeechSynthesisUtterance(str);
-    //utterThis.voice = "Microsoft Ravi - English (India)"
+    //utterThis.voice = voices[13]
+    //console.log(utterThis.voice)
     utterThis.pitch = 1;
-    utterThis.rate = 1;
+    utterThis.rate = 0.9;
     synth.speak(utterThis);
     //recognition.start()
     console.log('jojoj')
-
 }
 
 document.querySelectorAll('button')[1].onclick = () => {
@@ -49,8 +60,8 @@ recognition.onresult = function (event) {
         Say("hello");
 
     }
-    else if (recognised_words == "hai") {
-        var utterThis = new SpeechSynthesisUtterance("hii");
+    else if (recognised_words == "hai" || recognised_words == "hii" || recognised_words == "hi") {
+        var utterThis = new SpeechSynthesisUtterance("hi");
         synth.speak(utterThis);
     }
 
@@ -63,7 +74,9 @@ recognition.onresult = function (event) {
         Say('Ashu made me so better you ask him why i am slow')
     }
 
-
+    else if (recognised_words.includes('do you know shashank')){
+        Say('Yes he is a good friend of Ashu,Ashu told me about him')
+    }
 }
 
 
